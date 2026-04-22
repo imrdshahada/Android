@@ -1,0 +1,84 @@
+<!-- Assignment10:  Create application to demonstrate menu option--!>
+-----------------------------------------------------------------------
+//menu.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/selectionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click the 3 dots in the top right!"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//my_menu.xml (res/menu/my_menu.xml)
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="Settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Profile"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Logout"
+        app:showAsAction="never" />
+
+</menu>
+-----------------------------------------------------------------------
+//option_menu.java
+public class Option_menu extends AppCompatActivity {
+
+    private TextView selectionTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu);
+        selectionTextView = findViewById(R.id.selectionTextView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_settings) {
+            selectionTextView.setText("You selected: Settings");
+            return true;
+
+        } else if (id == R.id.menu_profile) {
+            selectionTextView.setText("You selected: Profile");
+            return true;
+
+        } else if (id == R.id.menu_logout) {
+            selectionTextView.setText("You selected: Logout");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
