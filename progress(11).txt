@@ -1,0 +1,93 @@
+<!-- Assignment11:  Create application to demonstrate progress bar --!>
+-----------------------------------------------------------------------
+//progress.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Bar Demo"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <ProgressBar
+        android:id="@+id/horizontalProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/progressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Download Task" />
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//Progress.java
+
+public class Progress extends AppCompatActivity {
+
+    private ProgressBar horizontalProgressBar;
+    private TextView progressTextView;
+    private Button startButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.progress);
+
+        horizontalProgressBar = findViewById(R.id.horizontalProgressBar);
+        progressTextView = findViewById(R.id.progressTextView);
+        startButton = findViewById(R.id.startButton);
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startButton.setEnabled(false);
+                startButton.setText("Downloading...");
+
+                new CountDownTimer(5000, 50) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        long timePassed = 5000 - millisUntilFinished;
+                        int currentProgress = (int) ((timePassed * 100) / 5000);
+
+                        horizontalProgressBar.setProgress(currentProgress);
+                        progressTextView.setText(currentProgress + "%");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        horizontalProgressBar.setProgress(100);
+                        progressTextView.setText("100%");
+
+                        startButton.setEnabled(true);
+                        startButton.setText("Task Complete! Start Again");
+                    }
+                }.start();
+            }
+        });
+    }
+}
