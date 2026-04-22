@@ -1,0 +1,39 @@
+<!-- Assignment5: Create an application for demonstration 
+of Scroll view in android --!>
+-----------------------------------------------------------------------
+//vertical_scroll.xml
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp">
+
+    <LinearLayout
+    android:id="@+id/scrollContentContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:justificationMode="inter_word"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>
+-----------------------------------------------------------------------
+//Vertical_scroll.java
+public class Vertical_scroll extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.vertical_scroll);
+    }
+}

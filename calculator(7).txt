@@ -1,0 +1,148 @@
+<!-- Assignment7: Create an application for calculator --!>
+-----------------------------------------------------------------------
+//calculator.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result: 0"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <EditText
+        android:id="@+id/number1EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter first number"
+        android:inputType="numberDecimal|numberSigned"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/number2EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter second number"
+        android:inputType="numberDecimal|numberSigned"
+        android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="24sp"
+            android:onClick="Add"/>
+
+        <Button
+            android:id="@+id/btnSub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-"
+            android:textSize="24sp"
+            android:onClick="Sub"/>
+
+        <Button android:id="@+id/btnMul"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="*"
+            android:textSize="24sp"
+            android:onClick="Mul"/>
+
+        <Button
+            android:id="@+id/btnDiv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="/"
+            android:textSize="24sp"
+            android:onClick="Div"/>
+    </LinearLayout>
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//Calculator.java
+
+public class Calculator extends AppCompatActivity {
+
+    private EditText number1EditText, number2EditText;
+    private TextView resultTextView;
+
+    private double num1 = 0;
+    private double num2 = 0;
+    private double result = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.calculator);
+
+        number1EditText = findViewById(R.id.number1EditText);
+        number2EditText = findViewById(R.id.number2EditText);
+        resultTextView = findViewById(R.id.resultTextView);
+    }
+
+    private boolean fetchNumbers() {
+        String num1String = number1EditText.getText().toString().trim();
+        String num2String = number2EditText.getText().toString().trim();
+
+        if (num1String.isEmpty() || num2String.isEmpty()) {
+            Toast.makeText(this, "Please enter both numbers", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        num1 = Double.parseDouble(num1String);
+        num2 = Double.parseDouble(num2String);
+        return true;
+    }
+
+    public void Add(View view) {
+        if (fetchNumbers()) { // Only do math if numbers were successfully fetched
+            result = num1 + num2;
+            resultTextView.setText("Result: " + result);
+        }
+    }
+
+    public void Sub(View view) {
+        if (fetchNumbers()) {
+            result = num1 - num2;
+            resultTextView.setText("Result: " + result);
+        }
+    }
+
+    public void Mul(View view) {
+        if (fetchNumbers()) {
+            result = num1 * num2;
+            resultTextView.setText("Result: " + result);
+        }
+    }
+
+    public void Div(View view) {
+        if (fetchNumbers()) {
+            if (num2 == 0) {
+                Toast.makeText(this, "Cannot divide by zero!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            result = num1 / num2;
+            resultTextView.setText("Result: " + result);
+        }
+    }
+}

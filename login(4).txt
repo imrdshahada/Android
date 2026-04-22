@@ -1,0 +1,86 @@
+<!-- Assignment4: Create sample application with login module.
+(Check username and password) On successful login, 
+Change TextView “Login Successful”. 
+And on failing login, alert user using Toast “Login fail --!>
+-----------------------------------------------------------------------
+//login_page.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Login"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="18sp"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//Login_Page.java
+
+public class Login_page extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_page);
+
+        TextView statusTextView = findViewById(R.id.statusTextView);
+        EditText usernameEditText = findViewById(R.id.usernameEditText);
+        EditText passwordEditText = findViewById(R.id.passwordEditText);
+        Button loginButton = findViewById(R.id.loginButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+
+                if (username.equals("admin") && password.equals("1234")) {
+                    statusTextView.setText("Login Successful");
+                } else {
+                    Toast.makeText(Login_page.this, "Login fail", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}

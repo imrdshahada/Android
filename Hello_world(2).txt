@@ -1,0 +1,33 @@
+<!-- Assignment2: Create “Hello World” application. 
+That will display “Hello World” in the middle of the screen using 
+TextView Widget in the red color --!>
+-----------------------------------------------------------------------
+//hello_world.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/helloTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World"
+        android:textColor="#FF0000"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+---------------------------------------------------------------------------
+//Hello_world.java
+
+public class Hello_world extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hello_world);
+    }
+}

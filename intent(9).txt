@@ -1,0 +1,85 @@
+<!-- Assignment9: Demonstrate use of intent in android --!>
+-----------------------------------------------------------------------
+//login_intent.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is Login Page"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="15dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Move to Home Page"
+        android:onClick="Home"
+        android:gravity="center"></Button>
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//Login_Intent.java
+
+public class Login_Intent extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_intent);
+    }
+
+    public void Home(View v) {
+        Intent i = new Intent(Login_Intent.this, Home_Intent.class);
+        startActivity(i);
+    }
+}
+-----------------------------------------------------------------------
+//home_intent.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is Home Page"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="15dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Move to Login Page"
+        android:onClick="Login"
+        android:gravity="center"></Button>
+
+</LinearLayout>
+-----------------------------------------------------------------------
+//Home_Intent.java
+
+public class Home_Intent extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.home_intent);
+    }
+
+    public void Login(View v) {
+        Intent i = new Intent(Home_Intent.this, Login_Intent.class);
+        startActivity(i);
+    }
+}
