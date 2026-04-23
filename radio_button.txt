@@ -1,0 +1,83 @@
+//Xml file
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Gender:"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"/>
+
+    <RadioGroup
+        android:id="@+id/genderRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+        <RadioButton
+            android:id="@+id/radioOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Selected Gender: None"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3F51B5"/>
+
+</LinearLayout>
+
+//Java File
+public class MainActivity extends AppCompatActivity {
+
+    private RadioGroup genderRadioGroup;
+    private TextView resultTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // 1. Initialize the views from the XML
+        genderRadioGroup = findViewById(R.id.genderRadioGroup);
+        resultTextView = findViewById(R.id.resultTextView);
+
+        // 2. Set the listener for selection changes
+        genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the ID of the selected radio button
+                RadioButton selectedRadioButton = findViewById(checkedId);
+
+                // Get the text from the selected button
+                String gender = selectedRadioButton.getText().toString();
+
+                // 3. Update the TextView
+                resultTextView.setText("Selected Gender: " + gender);
+            }
+        });
+    }
+}
