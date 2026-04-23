@@ -1,0 +1,89 @@
+//xml file
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Details"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type username here"
+        android:inputType="text"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="18sp"
+        android:onClick="displayUsername" 
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Waiting for input..."
+        android:textSize="20sp"
+        android:textColor="#0066CC"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+</LinearLayout>
+
+//java file
+package imrd.tybca.additionexample;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Username extends AppCompatActivity {
+
+    // Declare the widgets
+    private EditText usernameEditText;
+    private TextView resultTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.username);
+
+        // Link the widgets to their XML IDs
+        usernameEditText = findViewById(R.id.usernameEditText);
+        resultTextView = findViewById(R.id.resultTextView);
+    }
+
+    // This method is triggered when the Submit button is clicked
+    public void displayUsername(View view) {
+        // Grab the text the user typed
+        String enteredName = usernameEditText.getText().toString().trim();
+
+        // Check if the input is empty to prevent blank submissions
+        if (enteredName.isEmpty()) {
+            Toast.makeText(this, "Please enter a username first!", Toast.LENGTH_SHORT).show();
+            resultTextView.setText("Waiting for input...");
+        } else {
+            // Update the TextView below the button
+            resultTextView.setText("Hello, " + enteredName + "!");
+            
+            // Optional: Clear the input box after submission so it's ready for a new name
+            usernameEditText.setText("");
+        }
+    }
+}
