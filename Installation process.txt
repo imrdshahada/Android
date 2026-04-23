@@ -1,0 +1,35 @@
+1. Install Java Development Kit (JDK)
+Download the JDK from the Oracle website.
+Run the installer and follow the on-screen prompts.
+Set the Environment Variables: Add the JDK bin folder path to your system's PATH variable, and create a JAVA_HOME variable pointing to the JDK root folder.
+
+
+2. Setup Eclipse IDE
+Download "Eclipse IDE for Java Developers" from the official Eclipse website.
+Eclipse does not require installation. Simply extract the downloaded .zip file to a folder (e.g., C:\Eclipse).
+Run eclipse.exe and select a workspace folder when prompted.
+
+
+3. Setup Android SDK
+Download the standalone Android SDK Tools.
+Extract the tools to a safe location (e.g., C:\Android\android-sdk).
+Open the SDK Manager.exe, select the required Android API versions (e.g., Android 4.4) and Platform Tools, and click Install packages.
+
+
+4. Setup Android Development Tools (ADT) Plugin
+Open Eclipse and go to Help > Install New Software.
+Click Add. Name it "ADT Plugin" and enter the URL: https://dl-ssl.google.com/android/eclipse/ (or select your downloaded ADT .zip archive).
+Check the box for Developer Tools, click Next, accept the license, and install.
+Restart Eclipse.
+Go to Window > Preferences > Android, browse to your extracted Android SDK folder, and click Apply.
+
+
+5. Create Android Virtual Device (AVD)
+In Eclipse, go to Window > Android Virtual Device Manager.
+Click New.
+Fill in the details:
+AVD Name: Give your emulator a name.
+Device: Choose a screen size (e.g., Nexus 4).
+Target: Select the Android version you installed via the SDK Manager.
+CPU/ABI: Select ARM or Intel x86.
+Click OK to create the AVD. You can now select it and click Start to run the emulator.
